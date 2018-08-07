@@ -1,5 +1,7 @@
 # com.yzd.elk.installAndConfig
 ELK-5.6.10版本的安装与配置
+### Grok Debugger中文站,ELK日志解析工具
+http://grok.qiexun.net/
 ```
 #
 通过http://localhost:9200/查看集群信息
@@ -68,6 +70,8 @@ logstash的配置
 4.
 document type->匹配正则提取信息(log_java)
 fields.service->来判断索引(service_name)索引必须是小写
+5.logstash处理时区问题
+https://blog.csdn.net/wuyinggui10000/article/details/77879016
 5.fied
 参考地址：
 ELK+FileBeat+Log4Net搭建日志系统

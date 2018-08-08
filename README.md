@@ -76,6 +76,13 @@ https://blog.csdn.net/wuyinggui10000/article/details/77879016
 参考地址：
 ELK+FileBeat+Log4Net搭建日志系统
 https://www.cnblogs.com/yanbinliu/p/6208626.html
-
+/////////////////////////////////////////////////////////
+配置Kibana
+config/kibana.yml
+1.kibana 8小时->时区问题
+@timestamp 时区问题
+由于Kibana在时间选择空间上的max date设置为UTC时间，而该死的UTC时间比中国时间少了8个小时
+Kibana解决使用Custom无法正确选择时间的问题
+https://blog.csdn.net/gsyzhu/article/details/8706019
 ```
 

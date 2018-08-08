@@ -84,5 +84,35 @@ config/kibana.yml
 由于Kibana在时间选择空间上的max date设置为UTC时间，而该死的UTC时间比中国时间少了8个小时
 Kibana解决使用Custom无法正确选择时间的问题
 https://blog.csdn.net/gsyzhu/article/details/8706019
-```
+==
+2.
 
+```
+## kibana 显示字段顺序
+```
+1.traceId、level、logger、message、createTime、beat.name(IP地址)
+```
+### 启动
+```
+启动：
+filebeat:
+ .\filebeat.exe -e -c filebeat.yml
+ ==
+logstash:
+2.测试配置文件
+ .\logstash.bat -f first-pipeline.conf --config.test_and_exit
+3.自动加载配置文件的修改
+ .\logstash.bat -f first-pipeline.conf --config.reload.automatic
+  ==
+01-elasticsearch.bat启动：
+cd .\elasticsearch-5.6.10\bin\
+elasticsearch
+  ==
+02-elasticsearch-head.bat启动：
+cd .\elasticsearch-head-master\
+npm run start  
+  ==
+kibana启动：
+cd .\kibana-5.6.10-windows-x86\bin\
+kibana.bat
+```

@@ -40,6 +40,43 @@ filebeat.prospectors:
   ignore_older: 24h
   fields:
     service: service_order
+- 
+  paths:
+    #- /var/log/*.log
+    - E:\data\logs\com_yzd_web\*.log
+  document_type: log_yzd
+  input_type: log 
+  multiline.pattern: '^\[ELK=]'
+  multiline.negate: true
+  multiline.match: after
+  ignore_older: 24h
+  fields:
+    service: com_yzd_web
+- 
+  paths:
+    #- /var/log/*.log
+    - E:\data\logs\com_yzd_dubbo_service_provider\*.log
+  document_type: log_yzd
+  input_type: log 
+  multiline.pattern: '^\[ELK=]'
+  multiline.negate: true
+  multiline.match: after
+  ignore_older: 24h
+  fields:
+    service: com_yzd_dubbo_service_provider
+- 
+  paths:
+    #- /var/log/*.log
+    - E:\data\logs\com_yzd_dubbo_service_consumer\*.log
+  document_type: log_yzd
+  input_type: log 
+  multiline.pattern: '^\[ELK=]'
+  multiline.negate: true
+  multiline.match: after
+  ignore_older: 24h
+  fields:
+    service: com_yzd_dubbo_service_consumer
+
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
   # matching any regular expression from the list.
@@ -80,7 +117,7 @@ filebeat.prospectors:
 
 # The name of the shipper that publishes the network data. It can be used to group
 # all the transactions sent by a single shipper in the web interface.
-name: 192.168.1.111
+name: 192.168.0.233
 
 # The tags of the shipper are included in their own field with each
 # transaction published.

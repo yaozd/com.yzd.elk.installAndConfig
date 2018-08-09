@@ -92,7 +92,7 @@ https://blog.csdn.net/gsyzhu/article/details/8706019
 ```
 1.traceId、level、logger、message、createTime、beat.name(IP地址)
 ```
-### 启动
+## 启动
 ```
 启动：
 filebeat:
@@ -115,4 +115,22 @@ npm run start
 kibana启动：
 cd .\kibana-5.6.10-windows-x86\bin\
 kibana.bat
+```
+## logstash使用之日期处理
+```
+grok {
+            match => {
+             "message" => "\[ELK=]\[(?<traceId>[^]]*)]-\[(?<createTime>[^]]*)]-\[(?<level>[^]]*)]-\[(?<logger>[^]]*)][\s\S]*"
+             } 
+            overwrite => ["message"]
+        }
+date {
+	match => ["createTime", "yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSS"]
+	target => "logTime"
+	}
+使用logTime代替@timestamp
+将时间字符串转日期类型，在新建索引时可以使用logTime作为索引的时间区域（Time）
+参考：
+logstash使用之日期处理
+https://blog.csdn.net/qq_32292967/article/details/78623855
 ```

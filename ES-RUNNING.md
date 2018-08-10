@@ -28,6 +28,10 @@ cd  /usr/es/logstash-5.6.10/bin
 nohup ./logstash  -f first-pipeline.conf --config.reload.automatic >/dev/null 2>&1 & 
 ==
 05-filebeat
+
+cd /usr/es/filebeat-5.6.10-linux-x86_64
+./filebeat -e -c filebeat.yml 
+nohup ./filebeat -e -c filebeat.yml  >/dev/null 2>&1 & 
  .\filebeat.exe -e -c filebeat.yml
 ```
 ### nohup不输出日志信息的方法
@@ -42,4 +46,12 @@ nohup ./program >/dev/null 2>log &
 nohup ./program >/dev/null 2>&1 & 
 知识补充，关于Linux的重定向
 
+```
+### 启动和关闭：
+```$xslt
+日志采集客户端 filebeat 安装部署
+https://www.cnblogs.com/zhaojonjon/p/7289498.html
+启动：nohup /home/elk/filebeat/filebeat -e -c /home/elk/filebeat/filebeat.yml  &
+关闭：kill -9 `ps aux|grep filebeat|head -1|awk -F" " '{print $2}'`
+查看进程：ps aux |grep filebeat
 ```

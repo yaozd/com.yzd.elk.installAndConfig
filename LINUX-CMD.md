@@ -21,3 +21,17 @@ ps aux | grep ssh | grep -v "grep"
 每天一个linux命令（39）：grep 命令
 https://www.cnblogs.com/peida/archive/2012/12/17/2821195.html
 ```
+### 启动和关闭：
+```$xslt
+日志采集客户端 filebeat 安装部署
+https://www.cnblogs.com/zhaojonjon/p/7289498.html
+
+启动：nohup /home/elk/filebeat/filebeat -e -c /home/elk/filebeat/filebeat.yml  &
+关闭：kill -9 `ps aux|grep filebeat|head -1|awk -F" " '{print $2}'`
+查看进程：ps aux |grep filebeat
+```
+### CentOS7：没有netstat与ifconfig
+```$xslt
+yum install net-tools
+sudo yum install net-tools
+```

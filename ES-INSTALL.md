@@ -122,5 +122,17 @@ kibana-5.6.10-linux-x86_64.tar.gz
 logstash-5.6.10  
 logstash-5.6.10.zip
 ==
+```
+### nohup不输出日志信息的方法
+```
+nohup不输出日志信息的方法
+https://blog.csdn.net/u012164361/article/details/71527026
+推荐方案使用2 
+解决方案 
+只输出错误信息到日志文件 
+nohup ./program >/dev/null 2>log & 
+什么信息也不要 
+nohup ./program >/dev/null 2>&1 & 
+知识补充，关于Linux的重定向
 
 ```

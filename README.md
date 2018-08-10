@@ -125,11 +125,13 @@ grok {
             overwrite => ["message"]
         }
 date {
-	match => ["createTime", "yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSS"]
-	target => "logTime"
-	}
+			match => ["createTime", "yyyy-MM-dd HH:mm:ss.SSS","yyyy-MM-dd HH:mm:ss.SSS"]
+			target => "logTime"
+			timezone => "Asia/Shanghai"
+		}
 使用logTime代替@timestamp
 将时间字符串转日期类型，在新建索引时可以使用logTime作为索引的时间区域（Time）
+注意：timezone => "Asia/Shanghai"（没有时区会出时间差问题）
 参考：
 logstash使用之日期处理
 https://blog.csdn.net/qq_32292967/article/details/78623855

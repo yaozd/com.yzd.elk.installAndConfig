@@ -76,6 +76,30 @@ filebeat.prospectors:
   ignore_older: 24h
   fields:
     service: com_yzd_dubbo_service_consumer
+- 
+  paths:
+    #- /var/log/*.log
+    - E:\logs\pj_jeesite\*.log
+  document_type: log_yooeee
+  input_type: log 
+  multiline.pattern: '^\[ELK=]'
+  multiline.negate: true
+  multiline.match: after
+  ignore_older: 24h
+  fields:
+    service: pj_jeesite
+- 
+  paths:
+    #- /var/log/*.log
+    - E:\logs\pj_business\*.log
+  document_type: log_yooeee
+  input_type: log 
+  multiline.pattern: '^\[ELK=]'
+  multiline.negate: true
+  multiline.match: after
+  ignore_older: 24h
+  fields:
+    service: pj_business
 
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
@@ -145,7 +169,8 @@ name: 192.168.0.233
 #----------------------------- Logstash output --------------------------------
 output.logstash:
   # The Logstash hosts
-  hosts: ["localhost:5044"]
+  #hosts: ["localhost:5044"]
+  hosts: ["192.168.0.52:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications

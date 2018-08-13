@@ -35,3 +35,22 @@ https://www.cnblogs.com/zhaojonjon/p/7289498.html
 yum install net-tools
 sudo yum install net-tools
 ```
+### tail命令使用方法演示例子
+```$xslt
+1、tail -f filename
+说明：监视filename文件的尾部内容（默认10行，相当于增加参数 -n 10），刷新显示在屏幕上。退出，按下CTRL+C。
+2、tail -n 20 filename
+说明：显示filename最后20行。
+3、tail -r -n 10 filename
+说明：逆序显示filename最后10行。
+补充：
+跟tail功能相似的命令还有：
+cat 从第一行開始显示档案内容。
+tac 从最后一行開始显示档案内容。
+more 分页显示档案内容。
+less 与 more 相似，但支持向前翻页
+head 仅仅显示前面几行
+tail 仅仅显示后面几行
+n 带行号显示档案内容
+od 以二进制方式显示档案内容
+```    

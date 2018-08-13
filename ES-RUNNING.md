@@ -30,9 +30,9 @@ nohup ./logstash  -f first-pipeline.conf --config.reload.automatic >/dev/null 2>
 05-filebeat
 
 cd /usr/es/filebeat-5.6.10-linux-x86_64
-./filebeat -e -c filebeat.yml 
+ ./filebeat -e -c filebeat.yml      (for Linux)
 nohup ./filebeat -e -c filebeat.yml  >/dev/null 2>&1 & 
- .\filebeat.exe -e -c filebeat.yml
+ .\filebeat.exe -e -c filebeat.yml  (for Window)
 ```
 ### nohup不输出日志信息的方法
 ```

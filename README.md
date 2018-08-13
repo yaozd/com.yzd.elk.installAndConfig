@@ -88,6 +88,16 @@ https://blog.csdn.net/gsyzhu/article/details/8706019
 2.
 
 ```
+## kibana 时间格式调整-YYYY-MM-DD HH:mm:ss.SSS
+```
+kibana 5.6.10
+kibana ->Advanced Settings,修改dateFormat配置，具体的时间戳格式自己定义
+dateFormat默认：
+1.MMMM Do YYYY, HH:mm:ss.SSS
+eg：February 14th 2010, 3:25:50
+2 YYYY-MM-DD HH:mm:ss.SSS
+eg: 2018-08-10 17:55:16.224
+```
 ## kibana 显示字段顺序
 ```
 1.traceId、level、logger、message、createTime、beat.name(IP地址)
@@ -135,4 +145,17 @@ date {
 参考：
 logstash使用之日期处理
 https://blog.csdn.net/qq_32292967/article/details/78623855
+```
+### 日志命名
+```$xslt
+日志推荐按天生成。
+eg: pj_business服务
+pj-business.log
+pj-business.log.2018-08-09
+
+```
+### ELK索引的日志时间选择
+```$xslt
+@timestamp ：指日志filebeat的推送时间
+logtime ：指日志创建时间
 ```

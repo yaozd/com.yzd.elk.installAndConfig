@@ -1,0 +1,22 @@
+#
+filebeat.prospectors:
+- 
+  paths:
+    - /logs/pj_business/*.log
+    #- E:\logs\pj_business\*.log
+  document_type: log_yooeee
+  input_type: log 
+  multiline.pattern: '^\[ELK=]'
+  multiline.negate: true
+  multiline.match: after
+  ignore_older: 24h
+  fields:
+    service: pj_business
+
+name: 192.168.0.56
+
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  # The Logstash hosts
+  #hosts: ["localhost:5044"]
+  hosts: ["192.168.0.52:5044"]

@@ -33,6 +33,8 @@ cd /usr/es/filebeat-5.6.10-linux-x86_64
  ./filebeat -e -c filebeat.yml      (for Linux)
 nohup ./filebeat -e -c filebeat.yml  >/dev/null 2>&1 & 
  .\filebeat.exe -e -c filebeat.yml  (for Window)
+验证是否启动：
+ ps aux|grep 'filebeat'|grep -v 'grep'
 ```
 ### nohup不输出日志信息的方法
 ```
@@ -48,7 +50,7 @@ nohup ./program >/dev/null 2>&1 &
 
 ```
 ### 启动和关闭：
-```$xslt
+```
 日志采集客户端 filebeat 安装部署
 https://www.cnblogs.com/zhaojonjon/p/7289498.html
 启动：nohup /home/elk/filebeat/filebeat -e -c /home/elk/filebeat/filebeat.yml  &

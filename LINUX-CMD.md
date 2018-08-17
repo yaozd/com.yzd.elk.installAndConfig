@@ -57,4 +57,25 @@ head 仅仅显示前面几行
 tail 仅仅显示后面几行
 n 带行号显示档案内容
 od 以二进制方式显示档案内容
-```    
+``` 
+### 70个经典的 Shell 脚本
+```
+参考：
+分享70个经典的 Shell 脚本面试题与答案
+https://www.jb51.net/article/135168.htm
+Shell 教程
+http://www.runoob.com/linux/linux-shell.html
+shell脚本在线运行
+http://www.runoob.com/try/runcode.php?filename=helloworld&type=bash
+eg:
+-bash: ./filebeat-start.sh: Permission denied
+//提升权限
+chmod 777 filebeat-start.sh 
+```
+### shell 示例
+```
+#!/bin/bash
+echo "Hello World !"
+
+```
+   

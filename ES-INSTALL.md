@@ -110,6 +110,17 @@ tar -zxf download
 cd htop-1.0.2
 ./configure && make && make install
 ```
+### IK分词插件
+```
+IK分词插件
+ElasticSearch5.6.3 安装步骤
+https://blog.csdn.net/yqh5566/article/details/78558977
+每台机器都需要安装 
+以插件形式安装： 
+# cd elasticsearch-5.6.3 
+# ./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v5.6.3/elasticsearch-analysis-ik-5.6.3.zip 
+访问: 
+```
 ### 目录结构
 ```$xslt
 /usr/es/:

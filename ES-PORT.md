@@ -18,3 +18,17 @@ kibana      | http://192.168.0.52:5601/app/kibana |
 - /usr/es/(安装启动程序)
 - /logs/(程序日志目录)
 
+### ELK-用户规化
+服务名       | 启动用户名          | Cool  
+ ---------- |:-------------:| -----:
+elasticsearch     |elsearch | 
+elasticsearch-head      | root | 
+kibana      | root | 
+logstash      | root |
+
+### ES-elasticsearch目录规化 
+目录       | 地址          |  
+ ---------- |:-------------:
+软件目录     |/usr/es/elasticsearch-5.6.10 | 
+数据目录     | /data/es/data | 
+日志目录     | /data/es/logs | 

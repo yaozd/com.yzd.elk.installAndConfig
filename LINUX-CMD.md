@@ -58,6 +58,12 @@ tail 仅仅显示后面几行
 n 带行号显示档案内容
 od 以二进制方式显示档案内容
 ``` 
+#### which命令的绝对路径
+```
+which命令用于查找并显示给定命令的绝对路径
+http://man.linuxde.net/which
+which pwd
+```
 ### 70个经典的 Shell 脚本
 ```
 参考：

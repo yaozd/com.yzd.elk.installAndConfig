@@ -1,7 +1,12 @@
 package com.yzd.example.elasticsearch.demo;
 
+import com.yzd.example.elasticsearch.demo.configES.SearchTemplateES;
+import com.yzd.example.elasticsearch.demo.configES.TemplateEnumES;
+import com.yzd.example.elasticsearch.demo.configES.TemplateInfoES;
+import com.yzd.example.elasticsearch.demo.configES.TemplateInfoXmlES;
 import com.yzd.example.elasticsearch.demo.model.NewsWhere;
 import com.yzd.example.elasticsearch.demo.service.SearchService;
+import com.yzd.example.elasticsearch.demo.utils.XmlUtil2;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.swing.plaf.PanelUI;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -52,5 +59,31 @@ public class SpringBootElasticsearchRestfulDemoApplicationTests {
         //where.setContent("创建文档\"");
         where.setContent("创建文档1");
         searchService.searchDomentByJsonAndWhere(where);
+    }
+    @Test
+    public void searchDomentByJsonTemplateInfoXML(){
+        TemplateInfoES templateInfoES= SearchTemplateES.get(TemplateEnumES.查询前10条新闻);
+        String json=templateInfoES.getTemplateJSON();
+        NewsWhere where=new NewsWhere();
+        where.setContent("创建文档");
+        searchService.searchDomentByJsonTemplateInfo(json,where);
+    }
+
+    /***
+     * 通过配置信息读取索引值与索引类型值
+     */
+    @Test
+    public void searchDomentByJsonTemplateInfo2(){
+        NewsWhere where=new NewsWhere();
+        where.setContent("创建文档");
+        searchService.searchDomentByJsonTemplateInfo2(TemplateEnumES.查询前10条新闻带索引配置,where);
+    }
+    @Test
+    public void printTemplateInfoXml(){
+        //List<TemplateInfoES> templateInfoESList=new ArrayList<>();
+        //templateInfoESList.add(new TemplateInfoES(TemplateEnumES.查询商品信息.getValue(),"查询商品信息","select * from product","template-json","查询商品信息-WHERE"));
+        //TemplateInfoXmlES templateInfoXmlESObj=new TemplateInfoXmlES();
+        //templateInfoXmlESObj.setTemplateInfo(templateInfoESList);
+        //System.out.println(XmlUtil2.toXMLBeautiful(templateInfoXmlESObj,"utf-8"));
     }
 }

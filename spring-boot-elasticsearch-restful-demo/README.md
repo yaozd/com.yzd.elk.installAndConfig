@@ -7,6 +7,8 @@
     -  https://github.com/graylog-labs/jest-elasticsearch-rest
 - SpringBoot 整合Jest实例代码讲解
     -  https://www.jb51.net/article/145981.htm
+- Elasticsearch 连接查询
+    - https://www.cnblogs.com/xing901022/p/4979276.html
 ## 当前代码使用的ES版本是5.6.10
 ### 【Elastic HD(-360企业安全集团终端安全子公司)】上sql转为DSL后直接使用
 ```

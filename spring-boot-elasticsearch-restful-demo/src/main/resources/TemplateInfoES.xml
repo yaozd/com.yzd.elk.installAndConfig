@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<arrayOfTemplateInfo>
+    <templateInfo>
+        <templateID>1</templateID>
+        <templateName>查询商品信息</templateName>
+        <templateSQL>select * from product</templateSQL>
+        <templateJSON>template-json</templateJSON>
+        <templateDes>查询商品信息-WHERE</templateDes>
+    </templateInfo>
+    <templateInfo>
+        <templateID>2</templateID>
+        <templateName>查询前10条新闻</templateName>
+        <templateSQL>select * from news limit 10</templateSQL>
+        <templateJSON>
+            <![CDATA[
+            {
+            	"query": {
+            		"bool": {
+            			"must": [{
+            				"match_all": {}
+            			}],
+            			"must_not": [],
+            			"should": []
+            		}
+            	},
+            	"from": 0,
+            	"size": 10,
+            	"sort": [],
+            	"aggs": {}
+            }
+            ]]>
+        </templateJSON>
+        <templateDes>查询商品信息-WHERE</templateDes>
+    </templateInfo>
+    <!--通过搜索模板的方式进行ES查询配置-->
+    <templateInfo>
+        <templateID>3</templateID>
+        <templateName>查询前10条新闻带索引配置</templateName>
+        <templateDes>查询前10条新闻带索引配置-WHERE</templateDes>
+        <!--模板对应索引信息-多个索引中间用”,“(英文逗号)分割-->
+        <indexOfDocument>news</indexOfDocument>
+        <!--模板对应索引类型信息-多个索引类型中间用”,“(英文逗号)分割-->
+        <indexTypeOfDocument>twitter</indexTypeOfDocument>
+        <templateSQL>select * from news limit 10</templateSQL>
+        <templateJSON>
+            <![CDATA[
+            {
+            	"query": {
+            		"bool": {
+            			"must": [{
+            				"match_all": {}
+            			}],
+            			"must_not": [],
+            			"should": []
+            		}
+            	},
+            	"from": 0,
+            	"size": 10,
+            	"sort": [],
+            	"aggs": {}
+            }
+            ]]>
+        </templateJSON>
+
+    </templateInfo>
+</arrayOfTemplateInfo>

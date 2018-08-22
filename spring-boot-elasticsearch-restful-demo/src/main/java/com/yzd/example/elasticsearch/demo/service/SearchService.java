@@ -1,5 +1,9 @@
 package com.yzd.example.elasticsearch.demo.service;
 
+import com.google.common.collect.ImmutableList;
+import com.yzd.example.elasticsearch.demo.configES.SearchTemplateES;
+import com.yzd.example.elasticsearch.demo.configES.TemplateEnumES;
+import com.yzd.example.elasticsearch.demo.configES.TemplateInfoES;
 import com.yzd.example.elasticsearch.demo.model.News;
 import com.yzd.example.elasticsearch.demo.model.NewsWhere;
 import com.yzd.example.elasticsearch.demo.utils.ESWhereUtil;
@@ -13,9 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /***
  *
@@ -168,6 +170,54 @@ public void  test(){
         }
         //构建搜索功能
         Search search = new Search.Builder(json).addIndex("news").addType("twitter").build();
+        try {
+            SearchResult result = client.execute(search);
+            System.out.println(result.getJsonString());
+            List<SearchResult.Hit<News, Void>> hits = result.getHits(News.class);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+    public void searchDomentByJsonTemplateInfo(String json,NewsWhere where){
+        String whereJson=FastJsonUtil.serialize(where);
+        Map<String,Object>whereMap=FastJsonUtil.json2Map(whereJson);
+        for (Map.Entry<String, Object> entry : whereMap.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+            //将查询条件中的引号(包括双引号与单引号)进行转义
+            json=json.replace(entry.getKey().toString(),ESWhereUtil.convertQuotation(entry.getValue().toString()));
+        }
+        //构建搜索功能
+        Search search = new Search.Builder(json).addIndex("news").addType("twitter").build();
+        try {
+            SearchResult result = client.execute(search);
+            System.out.println(result.getJsonString());
+            List<SearchResult.Hit<News, Void>> hits = result.getHits(News.class);
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    /***
+     * 通过配置信息读取索引值与索引类型值
+     * @param templateEnumES
+     * @param where
+     */
+    public void searchDomentByJsonTemplateInfo2(TemplateEnumES templateEnumES, NewsWhere where){
+        TemplateInfoES templateInfoES= SearchTemplateES.get(templateEnumES);
+        String json=templateInfoES.getTemplateJSON();
+        String indexStr=templateInfoES.getIndexOfDocument().trim();
+        List<String> indexList = Arrays.asList(indexStr.split(","));
+        String indexTypeStr=templateInfoES.getIndexTypeOfDocument().trim();
+        List<String> indexTypeList = Arrays.asList(indexTypeStr.split(","));
+        String whereJson=FastJsonUtil.serialize(where);
+        Map<String,Object>whereMap=FastJsonUtil.json2Map(whereJson);
+        for (Map.Entry<String, Object> entry : whereMap.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+            //将查询条件中的引号(包括双引号与单引号)进行转义
+            json=json.replace(entry.getKey().toString(),ESWhereUtil.convertQuotation(entry.getValue().toString()));
+        }
+        //构建搜索功能
+        Search search = new Search.Builder(json).addIndices(indexList).addTypes(indexTypeList).build();
         try {
             SearchResult result = client.execute(search);
             System.out.println(result.getJsonString());

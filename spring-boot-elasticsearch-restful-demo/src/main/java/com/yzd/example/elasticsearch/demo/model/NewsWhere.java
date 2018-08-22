@@ -3,7 +3,7 @@ package com.yzd.example.elasticsearch.demo.model;
 import com.alibaba.fastjson.annotation.JSONField;
 
 /***
- *NewsWhere 的
+ *NewsWhere 的 条件
  *
  * Created by yzd on 2018/8/22 10:00.
  */

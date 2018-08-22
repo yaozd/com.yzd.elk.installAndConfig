@@ -16,6 +16,21 @@
 //对应的sql语句：select * from news
 String json ="{\"query\":{\"bool\":{\"must\":[{\"match_all\":{}}],\"must_not\":[],\"should\":[]}},\"from\":0,\"size\":10,\"sort\":[],\"aggs\":{}}";
 ```
+### 如何找到更加精确的sql转为DSL的语句
+```
+1,在elasticsearch-head的【基本查询】中【显示查询语句】找到精确的where条件
+2.通过【Elastic HD(-360企业安全集团终端安全子公司)】上sql转为DSL的语句，根据上面的where 语名进行调整
+3.在where语句中优先使用keyword做查询，例如：name.keyword 不要使用name
+```
+### elasticsearch的keyword与text的区别
+```
+减少对字段的分析，可以提高ES的性能
+eg:
+keyword：存储数据时候，不会分词建立索引,keyword字段不会进行分词.属于精确查询。
+text：存储数据时候，会自动分词，并生成索引（这是很智能的，但在有些字段里面是没用的，所以对于有些字段使用text则浪费了空间）。
+一般情况下推荐使用keyword做查询，可以提高性能
+"{\"query\":{\"bool\":{\"must\":[{\"term\":{\"content.keyword\":\"#NewsWhere.content#\"}}],\"must_not\":[],\"should\":[]}},\"from\":0,\"size\":10,\"sort\":[],\"aggs\":{}}";
+```
 
 # Jest
 

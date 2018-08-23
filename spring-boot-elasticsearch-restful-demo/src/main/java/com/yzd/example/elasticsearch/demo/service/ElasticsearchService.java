@@ -28,6 +28,9 @@ public class ElasticsearchService {
     /***
      * 创建索引
      *
+     * 创建一个索引，这个索引的名称最好带上版本号，比如my_index_v1,my_index_v2等。
+     * elasticsearch更改mapping(不停服务重建索引)
+     * https://blog.csdn.net/u014042758/article/details/79617591
      */
     public void createIndex() {
         String indexName="oldindex";

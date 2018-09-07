@@ -13,6 +13,30 @@ https://www.cnblogs.com/Dylansuns/p/6974272.html
 [01]==
 linux 安装 Elasticsearch5.6.x 详细步骤以及问题解决方案
 https://www.cnblogs.com/lizichao1991/p/7809156.html
+ES系列一、CentOS7安装ES 6.3.1-问题处理-(安装后的问题可以能参考此文)
+http://www.cnblogs.com/wangzhuxing/p/9351245.html
+注：把环境参考调整完后，最好是再打开一个新的窗口，再测试。
+==
+[问题] max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536] 
+vim /etc/security/limits.conf
+//
+* soft nofile 65536
+* hard nofile 131072
+* soft nproc 2048
+* hard nproc 4096
+==
+[问题]max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+vim /etc/sysctl.conf
+//
+vm.max_map_count=655360
+//
+ sysctl -p 
+==
+[问题]max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+vim /etc/security/limits.d/90-nproc.conf
+//
+* soft nproc 204800 
+* hard nproc 204800 
 ==
 附： 
 ./elasticsearch console ——-前台运行 
@@ -57,9 +81,23 @@ git clone git://github.com/mobz/elasticsearch-head.git
 cd elasticsearch-head
 修改
 执行命令vim Gruntfile.js文件：增加hostname属性，设置为*
+==
+connect: {
+			server: {
+				options: {
+					port: 9100,
+					hostname: '*',
+					base: '.',
+					keepalive: true
+				}
+			}
+		}
+==
 修改
 vim _site/app.js 文件：修改head的连接地址:
-
+==
+this.base_uri = this.config.base_uri || this.prefs.get("app-base_uri") || "http://10.174.88.201:9200";
+==
 npm install
 npm run start 或者 grunt server
 open http://localhost:9100/

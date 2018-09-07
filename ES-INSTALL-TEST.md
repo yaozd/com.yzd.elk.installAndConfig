@@ -22,6 +22,13 @@ output {
 2.
 启动
  ./logstash  -f first-pipeline-stdin.conf
+==
+1.
+./logstash  -f first-pipeline.conf --config.test_and_exit
+2.
+nohup ./logstash  -f first-pipeline.conf --config.reload.automatic >/dev/null 2>&1 & 
+
+
 ```
 3.数据验证
 ```
@@ -32,6 +39,11 @@ output {
 ```
 telnet 192.168.0.52 9200
 ```
+2.查看进程
+```
+ps aux|grep 'filebeat'|grep -v 'grep'
+```
+
 ####3.配置参考”es-linux-conf“文件夹
 ```
 1.

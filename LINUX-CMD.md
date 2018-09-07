@@ -1,7 +1,50 @@
+### linux 通过命令行获取本机外网IP
+```
+curl myip.dnsomatic.com
+```
+### chown更改文件的所有者与chmod改变文件或目录的访问权限
+```
+用途：更改文件的所有者或组。命令由单词change owner组合而成
+chown -R elsearch:elsearch /data/
+==
+chmod 777 XXX
+```
 ### 查看当前磁盘容量
-```aidl
+```
 df -hT
 (T是大写的字母)
+```
+### linux下，一个运行中的程序，究竟占用了多少内存（单位kb）
+- [linux下，一个运行中的程序，究竟占用了多少内存](https://www.cnblogs.com/benmm/p/4248956.html)
+- [Linux下查看某一进程所占用内存的方法](https://www.cnblogs.com/freeweb/p/5407105.html)
+- [Linux进程的内存使用情况](https://segmentfault.com/a/1190000008125059)
+- [Linux下查看内存使用情况方法总结](https://www.cnblogs.com/zhuiluoyu/p/6154898.html)
+
+```
+[RSS]表示程序占用了多少物理内存
+[VSZ]表示程序占用了多少物理内存
+ps aux --sort -rss
+ps -aux|sort -k 4 -rn |head -10 （与ps aux --sort -rss是一样的，推荐使用ps aux --sort -rss）
+//显示物理内存占用前10
+ps aux --sort -rss|head -10
+//显示单独一个进程
+top -p 32475
+//显示详细信息
+cat /proc/32475/status
+//实际上每段占用了多少物理内存，要想看到RSS，需要使用-X参数
+pmap -X 32475
+
+```
+### 查看当前服务
+```
+whereis nginx (查看nginx的目录)
+```
+### mv命令
+```
+mv /usr/lib/* /001
+是将 /usr/lib/下所有的东西移到/001/中。
+mv /usr/lib/ /001
+是将lib和其内部的所有东西移到/001/中。 此后，/usr里不再有lib; /001里有lib/及其原有的东西。
 ```
 
 ### linux查看端口占用情况

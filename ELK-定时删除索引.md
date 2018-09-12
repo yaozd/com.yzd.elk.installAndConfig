@@ -29,7 +29,32 @@ curl -XPOST http://example.comr:9200/my_index/_open
 #### 1.elk每日清除15天索引脚本-demo
 - [elasticsearch的索引自动清理及自定义清理](https://www.cnblogs.com/vijayfly/p/6763127.html)
 
-1.es-index-clear.sh
+1.es-index-clear.sh(版本二)
+- 每日关闭7天前的日志+每日删除15天前的日志
+
+```
+#!/bin/bash
+#定时清除elk索引，15天
+DATEForClose=`date -d "7 days ago" +%Y.%m.%d`
+DATEForDelete=`date -d "15 days ago" +%Y.%m.%d`
+echo ${DATEForClose}
+echo ${DATEForDelete}
+#当前日期
+time=`date`
+echo $time
+#关闭15天前的日志
+curl -XPOST http://192.168.0.52:9200/*-${DATEForClose}/_close
+#删除15天前的日志
+curl -XDELETE http://192.168.0.52:9200/*-${DATEForDelete}
+#删除日志
+if [ $? -eq 0 ];then
+echo $time"-->close $DATEForClose index del $DATEForDelete index log success.." >> /tmp/es-index-clear.log
+else
+echo $time"-->close $DATEForClose index del $DATEForDelete index log fail.." >> /tmp/es-index-clear.log
+fi
+
+```
+1.es-index-clear.sh(版本一)
 ```
 #!/bin/bash
 #定时清除elk索引，15天
@@ -50,7 +75,7 @@ else
 echo $time"-->del $DATA log fail.." >> /tmp/es-index-clear.log
 fi
 ```
-2.crontab最小单位是分钟【最小单位是分钟】
+2.LINUX系统下crontab最小单位是分钟【最小单位是分钟】
 
 2.添加到任务计划(每天凌晨1点执行)
 ```
@@ -135,4 +160,31 @@ tail /var/log/cron
 source /etc/profile
 #其他代码不变
 ==
+```
+
+### [Centos7:利用crontab定时执行任务](https://www.cnblogs.com/ihuangjianxin/p/7837193.html)
+```
+cron服务是Linux的内置服务，但它不会开机自动启动。可以用以下命令启动和停止服务：
+
+systemctl start crond
+
+systemctl stop crond
+
+systemctl restart crond
+
+systemctl reload crond
+以上1-4行分别为启动、停止、重启服务和重新加载配置。
+要把cron设为在开机的时候自动启动，在 /etc/rc.d/rc.local 脚本中加入 /sbin/service crond start 即可
+查看当前用户的crontab，输入 crontab -l；
+编辑crontab，输入 crontab -e；
+删除crontab，输入 crontab -r
+
+添加任务
+  crontab -e
+  0 */1 * * * command
+  0 */2 * * * command
+查询任务是否加了：
+  crontab -l -u root #查看root用户
+  0 */1 * * * command
+  0 */2 * * * command
 ```

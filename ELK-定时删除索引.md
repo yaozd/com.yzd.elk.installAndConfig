@@ -50,11 +50,13 @@ else
 echo $time"-->del $DATA log fail.." >> /tmp/es-index-clear.log
 fi
 ```
+2.crontab最小单位是分钟【最小单位是分钟】
+
 2.添加到任务计划(每天凌晨1点执行)
 ```
 crontab -e
-0 0 1 * *  sh /usr/es/cmd-shell/es-index-clear.sh
-0 0 1 * *  sh /usr/es/cmd-shell/es-index-clear.sh > /dev/null 2>&1
+0 1 * *  sh /usr/es/cmd-shell/es-index-clear.sh
+0 1 * *  sh /usr/es/cmd-shell/es-index-clear.sh > /dev/null 2>&1
 ```
 
 #### 2.elk每日清除30天索引脚本

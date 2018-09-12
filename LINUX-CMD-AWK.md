@@ -41,6 +41,9 @@ clusterName=curl  http://192.168.0.52:9200 |awk '/cluster_name/{print$0}'|awk -F
 RESULT=$(curl -s http://192.168.0.52:9200)
 DATA=$(echo $RESULT|awk '/cluster_name/{print$0}'|awk -F '"' '{print$4}')
 echo $DATA
+if ["$DATA" -eq "OK"]; then
+echo "OK"
+fi
 
 ```
 IF ELSEÌõ¼þÊ¾Àý£º

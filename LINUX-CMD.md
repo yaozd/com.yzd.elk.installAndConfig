@@ -101,12 +101,94 @@ tail 仅仅显示后面几行
 n 带行号显示档案内容
 od 以二进制方式显示档案内容
 ``` 
+####　awk命令
+- [linux shell awk获得外部变量（变量传值）简介](https://www.cnblogs.com/chengmo/archive/2010/10/03/1841753.html)
+
+```
+curl  http://192.168.0.52:9200 |awk '/cluster_name/{print$0}'|awk -F '"' '{print$4}'
+clusterName=curl  http://192.168.0.52:9200 |awk '/cluster_name/{print$0}'|awk -F '"' '{print$4}'
+==
+#!/bin/bash
+RESULT=$(curl -s http://192.168.0.52:9200)
+DATA=$(echo $RESULT|awk '/cluster_name/{print$0}'|awk -F '"' '{print$4}')
+echo $DATA
+``` 
+
 #### which命令的绝对路径
 ```
 which命令用于查找并显示给定命令的绝对路径
 http://man.linuxde.net/which
 which pwd
 ```
+
+#### [shell脚本中字符串的常见操作及"command not found"报错处理(附源码)](https://www.cnblogs.com/han-1034683568/p/7217047.html)
+```
+字符串的定义与赋值
+# 定义STR1变量，值为abc
+STR1 = "abc"(错误写法)
+STR1="abc"(正确写法)
+==
+字符串连接
+STR1="abc"
+STR2="abbcd abc ccc"
+
+#连接STR1和STR2变量并赋值给STR3
+STR3=$STR1$STR2
+echo $STR3
+
+#连接STR1与"abc" 并赋值给STR4
+STR4=$STR1"abc"
+echo $STR4
+==
+if条件语句中的空格
+# 比较两个字符串是否相等中if语句的写法
+
+STR1="abc"
+STR2="abcd"
+
+if[$STR1=$STR2](错误写法)
+
+if [ $STR1 = $STR2 ](正确写法)
+```
+#### [shell中判断字符串包含关系的方法](https://www.cnblogs.com/han-1034683568/p/7217047.html)
+```
+利用grep关键字查找
+#!/bin/bash
+
+# file:testStr.sh
+# author:13
+# date:2017-07-21
+
+STR1="abc"
+STR2="abbcd abc ccc"
+
+result=$(echo $STR2 | grep "${STR1}")
+echo $result
+ if [[ "$result" != "" ]]
+ then
+     echo "包含"
+ else
+     echo "不包含"
+ fi
+==
+利用字符串运算符(更简洁、推荐使用)
+#!/bin/bash
+
+# file:testStr.sh
+# author:13
+# date:2017-07-21
+
+STR1="abc"
+STR2="abbcd abc ccc"
+
+if [[ $STR2 =~ $STR1 ]]
+ then
+     echo "包含"
+ else
+     echo "不包含"
+ fi
+```
+
 ### [101个shell脚本](http://blog.51cto.com/zero01/2046242)
 
 ### 70个经典的 Shell 脚本

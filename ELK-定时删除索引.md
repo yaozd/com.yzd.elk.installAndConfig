@@ -80,8 +80,8 @@ fi
 2.添加到任务计划(每天凌晨1点执行)
 ```
 crontab -e
-0 1 * *  sh /usr/es/cmd-shell/es-index-clear.sh
-0 1 * *  sh /usr/es/cmd-shell/es-index-clear.sh > /dev/null 2>&1
+0 1 * * *  /usr/es/cmd-shell/es-index-clear.sh
+0 1 * * *  /usr/es/cmd-shell/es-index-clear.sh > /dev/null 2>&1
 ```
 
 #### 2.elk每日清除30天索引脚本

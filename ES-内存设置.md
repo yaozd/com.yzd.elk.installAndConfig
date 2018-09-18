@@ -1,4 +1,16 @@
 ### ElasticSearch的内存设置
+- logstash与elasticsearch内存设置
+
+```
+此值的大小与当前机器的可使用资源有关
+调整内容
+config->jvm.options
+==
+#-Xms1g
+#-Xmx1g
+-Xms512m
+-Xmx512m
+```
 - [限制内存使用](https://www.elastic.co/guide/cn/elasticsearch/guide/current/_limiting_memory_usage.html)
 
 ```

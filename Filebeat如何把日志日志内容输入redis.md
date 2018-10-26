@@ -3,6 +3,50 @@ Filebeat->Logstash->Redis->Logstash-ES
 
 注：Redis支持用户名与密码连接方式
 
+### Filebeat直接把数据存储到Redis
+
+- [Filebeat之input和output（包含Elasticsearch Output 、Logstash Output、 Redis Output、 File Output和 Console Output）](https://www.cnblogs.com/zlslch/p/6623106.html)
+- [Redis Output| Filebeat Reference](https://www.elastic.co/guide/en/beats/filebeat/1.3/redis-output.html)
+
+```
+output:
+  redis:
+    # Set the host and port where to find Redis.
+    host: "localhost"
+    port: 6379
+
+    # Uncomment out this option if you want to store the topology in Redis.
+    # The default is false.
+    save_topology: true
+
+    # Optional index name. The default is filebeat and generates filebeat keys.
+    index: "filebeat"
+
+    # Optional Redis database number where the events are stored
+    # The default is 0.
+    db: 0
+
+    # Optional Redis database number where the topology is stored
+    # The default is 1. It must have a different value than db.
+    db_topology: 1
+
+    # Optional password to authenticate with. By default, no
+    # password is set.
+    # password: ""
+
+    # Optional Redis initial connection timeout in seconds.
+    # The default is 5 seconds.
+    timeout: 5
+
+    # Optional interval for reconnecting to failed Redis connections.
+    # The default is 1 second.
+    reconnect_interval: 1
+```
+
+### Filebeat把数据输出到控制台
+
+- [Console output| Filebeat Reference ](https://www.elastic.co/guide/en/beats/filebeat/1.3/console-output.html#console-output)
+
 ### [filebeat如何把日志日志内容输入redis，又如何取出呢？我的日志无法输入到redis](https://elasticsearch.cn/question/2169)
 
 ```
